@@ -1,0 +1,280 @@
+Scholar quest(combination of gapify and extra maxxer)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScholarQuest | Master Your College Prep</title>
+    <style>
+        /* CSS Styles */
+        :root {
+            --primary: #8b5cf6; /* Purple */
+            --secondary: #3b82f6; /* Blue */
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #10b981; /* Emerald Green */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(15, 23, 42, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background-image: radial-gradient(circle at center, #1e1b4b, var(--bg-dark));
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+            text-transform: capitalize;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            color: var(--text-muted);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.6);
+        }
+
+        /* Features Grid */
+        .features {
+            padding: 80px 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background-color: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            border-top: 4px solid var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* Interactive Dashboard Preview */
+        .dashboard-preview {
+            max-width: 1000px;
+            margin: 50px auto;
+            background-color: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .tabs {
+            display: flex;
+            background-color: rgba(0,0,0,0.2);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 20px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            color: var(--text-light);
+            background-color: rgba(139, 92, 246, 0.2);
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 40px;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #0b1120;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">ScholarQuest</div>
+        <a href="#" class="btn" style="padding: 10px 25px; font-size: 1rem;">Login / Get Started</a>
+    </nav>
+
+    <header class="hero">
+        <h1>Turn studying fun</h1>
+        <p>Master AP subjects, engage in meaningful extracurriculars, and build your ultimate college profile. ScholarQuest merges adaptive AI studying with intelligent activity matchmaking to turn rigorous academic review and resume building into an engaging, rewarding experience.</p>
+        <button class="btn">Create Your Profile</button>
+    </header>
+
+    <section class="features">
+        <div class="feature-card">
+            <h3>📚 Interactive Learning</h3>
+            <p>Master subject-themed modules. Complete challenges and earn milestone rewards by mastering AP practice questions tracked by our adaptive AI study engine.</p>
+        </div>
+        <div class="feature-card">
+            <h3>🌍 Extracurricular Matchmaking</h3>
+            <p>A dynamic questionnaire matches you with the perfect clubs, internships, and volunteer opportunities tailored to your specific college goals.</p>
+        </div>
+        <div class="feature-card">
+            <h3>📄 Auto-Resume Export</h3>
+            <p>Seamlessly log hours, upload proof of participation, and automatically export your achievements into a formatted resume or Common App activity list.</p>
+        </div>
+        <div class="feature-card">
+            <h3>🤖 AI Mentor & Skill Tracking</h3>
+            <p>Consult the AI Counselor for personalized goals. Track your academic growth in AP classes alongside your leadership development in clubs.</p>
+        </div>
+        <div class="feature-card">
+            <h3>💡 Scholarship Matcher</h3>
+            <p>Discover scholarships tailored to your unique profile. Get matched with real-world funding opportunities based on your academic stats and extracurricular involvement.</p>
+        </div>
+        <div class="feature-card">
+            <h3>👥 Peer Collaboration</h3>
+            <p>Form study groups with peers! Combine your volunteer hours for community milestones or tackle multiplayer AP review tournaments together.</p>
+        </div>
+    </section>
+
+    <!-- Interactive UI Preview -->
+    <h2 style="text-align: center; margin-top: 50px; color: var(--primary);">Student Dashboard Preview</h2>
+    <div class="dashboard-preview">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'quests')">Active Goals</button>
+            <button class="tab-btn" onclick="openTab(event, 'guild')">Extracurriculars</button>
+            <button class="tab-btn" onclick="openTab(event, 'stats')">Profile Stats</button>
+        </div>
+        
+        <div id="quests" class="tab-content active">
+            <h3 style="color: var(--secondary); margin-bottom: 15px;">AP US History: Unit 6 Challenge</h3>
+            <p><strong>Progress:</strong> 75% Completion</p>
+            <div style="background: #333; height: 20px; border-radius: 10px; margin: 10px 0 20px 0; overflow: hidden;">
+                <div style="background: var(--accent); width: 75%; height: 100%;"></div>
+            </div>
+            <p><em>AI Mentor Tip: "Focus on the Gilded Age chapter to improve your historical synthesis score!"</em></p>
+        </div>
+
+        <div id="guild" class="tab-content">
+            <h3 style="color: var(--secondary); margin-bottom: 15px;">Activity: Local Animal Shelter</h3>
+            <p><strong>Hours Logged:</strong> 42 / 50 for Next Milestone</p>
+            <p style="color: var(--text-muted); margin-top: 10px;">Upload proof of your latest shift to earn the "Community Leader" badge and unlock new tailored scholarship opportunities.</p>
+        </div>
+
+        <div id="stats" class="tab-content">
+            <h3 style="color: var(--secondary); margin-bottom: 15px;">Student Profile Ready for Export</h3>
+            <ul style="list-style-position: inside; color: var(--text-muted); margin-bottom: 20px;">
+                <li>Advanced AP Scholar</li>
+                <li>President of the Robotics Club</li>
+                <li>Leadership Score: 85/100</li>
+            </ul>
+            <button class="btn" style="padding: 10px 20px; font-size: 1rem;">Export to Common App</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 ScholarQuest. Master your education.</p>
+    </footer>
+
+    <!-- JavaScript for Tabs -->
+    <script>
+        function openTab(evt, tabName) {
+            // Get all elements with class="tab-content" and hide them
+            var tabcontent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+
+            // Get all elements with class="tab-btn" and remove the class "active"
+            var tablinks = document.getElementsByClassName("tab-btn");
+            for (var i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
