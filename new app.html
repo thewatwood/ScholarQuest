@@ -218,6 +218,91 @@
             font-size: 1.5rem;
         }
 
+        .planner-form,
+        .activity-form,
+        .scholarship-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .planner-form input,
+        .activity-form input,
+        .scholarship-controls input,
+        .scholarship-controls select {
+            flex: 1 1 180px;
+            min-width: 0;
+            padding: 11px 13px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 8px;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .planner-list,
+        .activity-list,
+        .scholarship-list {
+            display: grid;
+            gap: 12px;
+            list-style: none;
+        }
+
+        .planner-item,
+        .activity-item,
+        .scholarship-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 16px;
+            border-radius: 10px;
+            background: rgba(15, 23, 42, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .planner-item.done {
+            opacity: 0.65;
+        }
+
+        .planner-item.done .item-title {
+            text-decoration: line-through;
+        }
+
+        .item-title {
+            font-weight: bold;
+        }
+
+        .item-meta {
+            display: block;
+            margin-top: 4px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .scholarship-card {
+            align-items: flex-start;
+        }
+
+        .scholarship-card h4 {
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .scholarship-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .empty-state {
+            padding: 18px;
+            color: var(--text-muted);
+            text-align: center;
+            border: 1px dashed rgba(148, 163, 184, 0.35);
+            border-radius: 10px;
+        }
+
         .modal-backdrop {
             display: none;
             position: fixed;
@@ -416,6 +501,9 @@
             <button class="tab-btn active" type="button" aria-selected="true" aria-controls="quests" onclick="openTab(event, 'quests')">Active Goals</button>
             <button class="tab-btn" type="button" aria-selected="false" aria-controls="guild" onclick="openTab(event, 'guild')">Extracurriculars</button>
             <button class="tab-btn" type="button" aria-selected="false" aria-controls="stats" onclick="openTab(event, 'stats')">Profile Stats</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="planner" onclick="openTab(event, 'planner')">Study Planner</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="scholarships" onclick="openTab(event, 'scholarships')">Scholarships</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="activities" onclick="openTab(event, 'activities')">Activities</button>
         </div>
 
         <div id="quests" class="tab-content active">
@@ -451,6 +539,44 @@
                 <div class="stat-card"><strong id="profileName">Guest</strong>Name</div>
                 <div class="stat-card"><strong id="profilePoints">0</strong>Quest points</div>
                 <div class="stat-card"><strong id="profileHours">42</strong>Volunteer hours</div>
+            </div>
+
+            <div id="planner" class="tab-content">
+                <h3 style="color: var(--secondary); margin-bottom: 15px;">Weekly Study Planner</h3>
+                <p style="color: var(--text-muted);">Add focused tasks, set deadlines, and check them off as you build momentum.</p>
+                <form class="planner-form" id="plannerForm">
+                    <input id="taskInput" name="task" placeholder="e.g. Review APUSH Unit 6" required maxlength="100">
+                    <input id="taskDateInput" name="date" type="date" required>
+                    <button class="btn" type="submit">Add task</button>
+                </form>
+                <ul class="planner-list" id="plannerList"></ul>
+            </div>
+
+            <div id="scholarships" class="tab-content">
+                <h3 style="color: var(--secondary); margin-bottom: 15px;">Scholarship Matcher</h3>
+                <p style="color: var(--text-muted);">Filter opportunities by eligibility and save the ones you want to revisit.</p>
+                <div class="scholarship-controls">
+                    <input id="scholarshipSearch" placeholder="Search scholarships" aria-label="Search scholarships">
+                    <select id="scholarshipCategory" aria-label="Filter scholarships by category">
+                        <option value="all">All categories</option>
+                        <option value="STEM">STEM</option>
+                        <option value="Service">Community service</option>
+                        <option value="Arts">Arts</option>
+                        <option value="Leadership">Leadership</option>
+                    </select>
+                </div>
+                <div class="scholarship-list" id="scholarshipList"></div>
+            </div>
+
+            <div id="activities" class="tab-content">
+                <h3 style="color: var(--secondary); margin-bottom: 15px;">Extracurricular Activity Tracker</h3>
+                <p style="color: var(--text-muted);">Track leadership, service, clubs, and milestones in one place.</p>
+                <form class="activity-form" id="activityForm">
+                    <input id="activityInput" name="activity" placeholder="e.g. Robotics Club" required maxlength="80">
+                    <input id="activityHoursInput" name="hours" type="number" min="0" max="9999" placeholder="Hours" required>
+                    <button class="btn" type="submit">Add activity</button>
+                </form>
+                <ul class="activity-list" id="activityList"></ul>
             </div>
             <div class="dashboard-actions">
                 <button class="btn" id="exportButton" type="button">Export profile</button>
@@ -506,10 +632,19 @@
     <script>
         const profileStorageKey = 'scholarquest-profile';
         const progressStorageKey = 'scholarquest-progress';
+        const tasksStorageKey = 'scholarquest-tasks';
+        const activitiesStorageKey = 'scholarquest-activities';
+        const savedScholarshipsStorageKey = 'scholarquest-saved-scholarships';
         const profileModal = document.getElementById('profileModal');
         const profileForm = document.getElementById('profileForm');
         const toast = document.getElementById('toast');
         let toastTimer;
+        const scholarships = [
+            { id: 'stem-future', title: 'Future Builders STEM Award', category: 'STEM', amount: '$2,500', deadline: '2026-10-15', description: 'For students building practical solutions through science, technology, engineering, or math.' },
+            { id: 'service-impact', title: 'Community Impact Scholarship', category: 'Service', amount: '$1,500', deadline: '2026-11-01', description: 'Recognizes students who have made a measurable difference through consistent community service.' },
+            { id: 'creative-voice', title: 'Creative Voice Grant', category: 'Arts', amount: '$1,000', deadline: '2026-12-10', description: 'Supports emerging artists, writers, designers, and performers with a strong creative portfolio.' },
+            { id: 'lead-forward', title: 'Lead Forward Scholarship', category: 'Leadership', amount: '$3,000', deadline: '2027-01-20', description: 'For students who demonstrate leadership, initiative, and a plan to improve their communities.' }
+        ];
 
         function showToast(message) {
             toast.textContent = message;
@@ -520,6 +655,14 @@
 
         function getProgress() {
             return JSON.parse(localStorage.getItem(progressStorageKey) || '{"points":0,"hours":42,"goalComplete":false}');
+        }
+
+        function readCollection(key) {
+            return JSON.parse(localStorage.getItem(key) || '[]');
+        }
+
+        function saveCollection(key, value) {
+            localStorage.setItem(key, JSON.stringify(value));
         }
 
         function updateStats() {
@@ -564,6 +707,96 @@
             evt.currentTarget.classList.add("active");
             evt.currentTarget.setAttribute("aria-selected", "true");
             updateStats();
+            if (tabName === 'planner') renderTasks();
+            if (tabName === 'scholarships') renderScholarships();
+            if (tabName === 'activities') renderActivities();
+        }
+
+        function renderTasks() {
+            const list = document.getElementById('plannerList');
+            const tasks = readCollection(tasksStorageKey);
+            list.innerHTML = '';
+            if (!tasks.length) {
+                list.innerHTML = '<li class="empty-state">No study tasks yet. Add your first task above.</li>';
+                return;
+            }
+            tasks.sort((a, b) => a.date.localeCompare(b.date));
+            tasks.forEach((task) => {
+                const item = document.createElement('li');
+                item.className = `planner-item${task.done ? ' done' : ''}`;
+                item.innerHTML = `<div><span class="item-title"></span><span class="item-meta"></span></div><button class="btn btn-secondary" type="button">${task.done ? 'Undo' : 'Complete'}</button>`;
+                item.querySelector('.item-title').textContent = task.title;
+                item.querySelector('.item-meta').textContent = `Due ${task.date}`;
+                item.querySelector('button').addEventListener('click', () => {
+                    task.done = !task.done;
+                    saveCollection(tasksStorageKey, tasks);
+                    if (task.done) {
+                        const progress = getProgress();
+                        progress.points += 25;
+                        saveCollection(progressStorageKey, progress);
+                        showToast('Study task completed! +25 quest points.');
+                    }
+                    renderTasks();
+                    updateStats();
+                });
+                list.appendChild(item);
+            });
+        }
+
+        function renderScholarships() {
+            const list = document.getElementById('scholarshipList');
+            const query = document.getElementById('scholarshipSearch').value.toLowerCase();
+            const category = document.getElementById('scholarshipCategory').value;
+            const saved = readCollection(savedScholarshipsStorageKey);
+            const matches = scholarships.filter((item) => {
+                const matchesQuery = `${item.title} ${item.description}`.toLowerCase().includes(query);
+                return matchesQuery && (category === 'all' || item.category === category);
+            });
+            list.innerHTML = '';
+            if (!matches.length) {
+                list.innerHTML = '<div class="empty-state">No scholarships match those filters.</div>';
+                return;
+            }
+            matches.forEach((item) => {
+                const card = document.createElement('article');
+                const isSaved = saved.includes(item.id);
+                card.className = 'scholarship-card';
+                card.innerHTML = `<div><h4></h4><p></p><span class="item-meta"></span></div><button class="btn btn-secondary" type="button">${isSaved ? 'Saved' : 'Save'}</button>`;
+                card.querySelector('h4').textContent = `${item.title} - ${item.amount}`;
+                card.querySelector('p').textContent = item.description;
+                card.querySelector('.item-meta').textContent = `${item.category} | Deadline ${item.deadline}`;
+                card.querySelector('button').addEventListener('click', () => {
+                    const current = readCollection(savedScholarshipsStorageKey);
+                    const next = current.includes(item.id) ? current.filter((id) => id !== item.id) : [...current, item.id];
+                    saveCollection(savedScholarshipsStorageKey, next);
+                    renderScholarships();
+                    showToast(next.includes(item.id) ? 'Scholarship saved.' : 'Scholarship removed.');
+                });
+                list.appendChild(card);
+            });
+        }
+
+        function renderActivities() {
+            const list = document.getElementById('activityList');
+            const activities = readCollection(activitiesStorageKey);
+            list.innerHTML = '';
+            if (!activities.length) {
+                list.innerHTML = '<li class="empty-state">No activities yet. Add a club, volunteer role, or project.</li>';
+                return;
+            }
+            activities.forEach((activity) => {
+                const item = document.createElement('li');
+                item.className = 'activity-item';
+                item.innerHTML = `<div><span class="item-title"></span><span class="item-meta"></span></div><button class="btn btn-secondary" type="button">Remove</button>`;
+                item.querySelector('.item-title').textContent = activity.title;
+                item.querySelector('.item-meta').textContent = `${activity.hours} hours logged`;
+                item.querySelector('button').addEventListener('click', () => {
+                    saveCollection(activitiesStorageKey, activities.filter((entry) => entry.id !== activity.id));
+                    renderActivities();
+                    showToast('Activity removed.');
+                });
+                list.appendChild(item);
+            });
         }
 
         document.getElementById('profileButton').addEventListener('click', openProfileModal);
@@ -624,7 +857,9 @@
                 `Grade: ${profile.grade || 'Not set'}`,
                 `Interest: ${profile.interest || 'Not set'}`,
                 `Quest points: ${progress.points}`,
-                `Volunteer hours: ${progress.hours}`
+                `Volunteer hours: ${progress.hours}`,
+                `Study tasks: ${readCollection(tasksStorageKey).length}`,
+                `Activities: ${readCollection(activitiesStorageKey).map((item) => `${item.title} (${item.hours} hours)`).join(', ') || 'None'}`
             ].join('\n');
             const link = document.createElement('a');
             link.href = URL.createObjectURL(new Blob([exportText], { type: 'text/plain' }));
@@ -634,7 +869,35 @@
             showToast('Profile export downloaded.');
         });
 
+        document.getElementById('plannerForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const data = Object.fromEntries(new FormData(event.currentTarget));
+            const tasks = readCollection(tasksStorageKey);
+            tasks.push({ id: Date.now(), title: data.task, date: data.date, done: false });
+            saveCollection(tasksStorageKey, tasks);
+            event.currentTarget.reset();
+            renderTasks();
+            showToast('Study task added.');
+        });
+
+        document.getElementById('scholarshipSearch').addEventListener('input', renderScholarships);
+        document.getElementById('scholarshipCategory').addEventListener('change', renderScholarships);
+
+        document.getElementById('activityForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const data = Object.fromEntries(new FormData(event.currentTarget));
+            const activities = readCollection(activitiesStorageKey);
+            activities.push({ id: Date.now(), title: data.activity, hours: Number(data.hours) });
+            saveCollection(activitiesStorageKey, activities);
+            event.currentTarget.reset();
+            renderActivities();
+            showToast('Activity added to your profile.');
+        });
+
         updateStats();
+        renderTasks();
+        renderScholarships();
+        renderActivities();
     </script>
 </body>
 </html>
