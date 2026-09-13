@@ -377,6 +377,35 @@
             color: var(--accent);
         }
 
+        .login-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .login-divider::before,
+        .login-divider::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: rgba(148, 163, 184, 0.35);
+        }
+
+        .gmail-button {
+            width: 100%;
+            background: white;
+            color: #1f2937;
+            box-shadow: none;
+        }
+
+        .gmail-button:hover {
+            background: #f1f5f9;
+            box-shadow: none;
+        }
+
         .toast {
             position: fixed;
             right: 20px;
@@ -622,6 +651,28 @@
             </form>
         </div>
     </div>
+    <div class="modal-backdrop" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="loginModalTitle">Log in to ScholarQuest</h2>
+                <button class="close-modal" id="closeLoginButton" type="button" aria-label="Close login form">&times;</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-field">
+                    <label for="loginEmailInput">Account email</label>
+                    <input id="loginEmailInput" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
+                </div>
+                <div class="form-field">
+                    <label for="loginPasswordInput">Password</label>
+                    <input id="loginPasswordInput" name="password" type="password" required minlength="8" autocomplete="current-password" placeholder="Enter your password">
+                </div>
+                <button class="btn" type="submit">Log in with email</button>
+            </form>
+            <div class="login-divider">or</div>
+            <button class="btn gmail-button" id="gmailLoginButton" type="button">Continue with Gmail</button>
+            <p class="form-message" id="loginMessage" role="status"></p>
+        </div>
+    </div>
     <div class="toast" id="toast" role="status"></div>
 
     <footer>
@@ -637,6 +688,8 @@
         const savedScholarshipsStorageKey = 'scholarquest-saved-scholarships';
         const profileModal = document.getElementById('profileModal');
         const profileForm = document.getElementById('profileForm');
+        const loginModal = document.getElementById('loginModal');
+        const loginForm = document.getElementById('loginForm');
         const toast = document.getElementById('toast');
         let toastTimer;
         const scholarships = [
@@ -686,6 +739,16 @@
 
         function closeProfileModal() {
             profileModal.classList.remove('open');
+        }
+
+        function openLoginModal() {
+            document.getElementById('loginMessage').textContent = '';
+            loginModal.classList.add('open');
+            document.getElementById('loginEmailInput').focus();
+        }
+
+        function closeLoginModal() {
+            loginModal.classList.remove('open');
         }
 
         function openTab(evt, tabName) {
@@ -800,14 +863,21 @@
         }
 
         document.getElementById('profileButton').addEventListener('click', openProfileModal);
-        document.getElementById('loginButton').addEventListener('click', openProfileModal);
+        document.getElementById('loginButton').addEventListener('click', openLoginModal);
         document.getElementById('editProfileButton').addEventListener('click', openProfileModal);
         document.querySelector('.close-modal').addEventListener('click', closeProfileModal);
+        document.getElementById('closeLoginButton').addEventListener('click', closeLoginModal);
         profileModal.addEventListener('click', (event) => {
             if (event.target === profileModal) closeProfileModal();
         });
+        loginModal.addEventListener('click', (event) => {
+            if (event.target === loginModal) closeLoginModal();
+        });
         document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape') closeProfileModal();
+            if (event.key === 'Escape') {
+                closeProfileModal();
+                closeLoginModal();
+            }
         });
 
         profileForm.addEventListener('submit', (event) => {
@@ -818,6 +888,18 @@
             updateStats();
             showToast(`Welcome to ScholarQuest, ${data.name}!`);
             setTimeout(closeProfileModal, 700);
+        });
+
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const email = new FormData(loginForm).get('email');
+            document.getElementById('loginMessage').textContent = `Login request ready for ${email}. Connect this form to your authentication provider to enable account access.`;
+            showToast('Email login form submitted.');
+        });
+
+        document.getElementById('gmailLoginButton').addEventListener('click', () => {
+            document.getElementById('loginMessage').textContent = 'Gmail sign-in selected. Connect Google OAuth to enable secure Gmail authentication.';
+            showToast('Gmail sign-in selected.');
         });
 
         document.getElementById('completeGoalButton').addEventListener('click', () => {
