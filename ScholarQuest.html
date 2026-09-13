@@ -898,8 +898,8 @@
         });
 
         document.getElementById('gmailLoginButton').addEventListener('click', () => {
-            document.getElementById('loginMessage').textContent = 'Gmail sign-in selected. Connect Google OAuth to enable secure Gmail authentication.';
-            showToast('Gmail sign-in selected.');
+            document.getElementById('loginMessage').textContent = 'Gmail sign-in is not configured yet. Add a valid Google OAuth client ID and authorized website origin before enabling it.';
+            showToast('Gmail sign-in setup is required.');
         });
 
         document.getElementById('completeGoalButton').addEventListener('click', () => {
