@@ -1,4 +1,3 @@
-Scholar quest(combination of gapify and extra maxxer)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,6 +40,10 @@ Scholar quest(combination of gapify and extra maxxer)
             top: 0;
             z-index: 100;
             border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        main {
+            min-height: calc(100vh - 145px);
         }
 
         .logo {
@@ -175,6 +178,45 @@ Scholar quest(combination of gapify and extra maxxer)
             background-color: #0b1120;
             color: var(--text-muted);
         }
+
+        @media (max-width: 640px) {
+            nav {
+                padding: 16px 20px;
+            }
+
+            .logo {
+                font-size: 1.35rem;
+            }
+
+            nav .btn {
+                padding: 8px 14px !important;
+                font-size: 0.85rem !important;
+            }
+
+            .hero {
+                padding: 70px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .features {
+                padding: 50px 20px;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                padding: 15px;
+            }
+
+            .tab-content {
+                padding: 28px 22px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -184,13 +226,15 @@ Scholar quest(combination of gapify and extra maxxer)
         <a href="#" class="btn" style="padding: 10px 25px; font-size: 1rem;">Login / Get Started</a>
     </nav>
 
-    <header class="hero">
-        <h1>Turn studying fun</h1>
+    <main>
+      <header class="hero">
+        <h1>Make studying fun</h1>
         <p>Master AP subjects, engage in meaningful extracurriculars, and build your ultimate college profile. ScholarQuest merges adaptive AI studying with intelligent activity matchmaking to turn rigorous academic review and resume building into an engaging, rewarding experience.</p>
-        <button class="btn">Create Your Profile</button>
-    </header>
+        <button class="btn" type="button">Create Your Profile</button>
+      </header>
 
-    <section class="features">
+    <section class="features" aria-labelledby="features-heading">
+        <h2 id="features-heading" hidden>ScholarQuest features</h2>
         <div class="feature-card">
             <h3>📚 Interactive Learning</h3>
             <p>Master subject-themed modules. Complete challenges and earn milestone rewards by mastering AP practice questions tracked by our adaptive AI study engine.</p>
@@ -204,7 +248,7 @@ Scholar quest(combination of gapify and extra maxxer)
             <p>Seamlessly log hours, upload proof of participation, and automatically export your achievements into a formatted resume or Common App activity list.</p>
         </div>
         <div class="feature-card">
-            <h3>🤖 AI Mentor & Skill Tracking</h3>
+            <h3>🤖 AI Mentor &amp; Skill Tracking</h3>
             <p>Consult the AI Counselor for personalized goals. Track your academic growth in AP classes alongside your leadership development in clubs.</p>
         </div>
         <div class="feature-card">
@@ -221,11 +265,11 @@ Scholar quest(combination of gapify and extra maxxer)
     <h2 style="text-align: center; margin-top: 50px; color: var(--primary);">Student Dashboard Preview</h2>
     <div class="dashboard-preview">
         <div class="tabs">
-            <button class="tab-btn active" onclick="openTab(event, 'quests')">Active Goals</button>
-            <button class="tab-btn" onclick="openTab(event, 'guild')">Extracurriculars</button>
-            <button class="tab-btn" onclick="openTab(event, 'stats')">Profile Stats</button>
+            <button class="tab-btn active" type="button" aria-selected="true" aria-controls="quests" onclick="openTab(event, 'quests')">Active Goals</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="guild" onclick="openTab(event, 'guild')">Extracurriculars</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="stats" onclick="openTab(event, 'stats')">Profile Stats</button>
         </div>
-        
+
         <div id="quests" class="tab-content active">
             <h3 style="color: var(--secondary); margin-bottom: 15px;">AP US History: Unit 6 Challenge</h3>
             <p><strong>Progress:</strong> 75% Completion</p>
@@ -251,6 +295,7 @@ Scholar quest(combination of gapify and extra maxxer)
             <button class="btn" style="padding: 10px 20px; font-size: 1rem;">Export to Common App</button>
         </div>
     </div>
+    </main>
 
     <footer>
         <p>&copy; 2026 ScholarQuest. Master your education.</p>
@@ -269,11 +314,13 @@ Scholar quest(combination of gapify and extra maxxer)
             var tablinks = document.getElementsByClassName("tab-btn");
             for (var i = 0; i < tablinks.length; i++) {
                 tablinks[i].classList.remove("active");
+                tablinks[i].setAttribute("aria-selected", "false");
             }
 
             // Show the current tab, and add an "active" class to the button that opened the tab
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
+            evt.currentTarget.setAttribute("aria-selected", "true");
         }
     </script>
 </body>
