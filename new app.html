@@ -540,8 +540,13 @@
                 <div class="stat-card"><strong id="profilePoints">0</strong>Quest points</div>
                 <div class="stat-card"><strong id="profileHours">42</strong>Volunteer hours</div>
             </div>
+            <div class="dashboard-actions">
+                <button class="btn" id="exportButton" type="button">Export profile</button>
+                <button class="btn btn-secondary" id="editProfileButton" type="button">Edit profile</button>
+            </div>
+        </div>
 
-            <div id="planner" class="tab-content">
+        <div id="planner" class="tab-content">
                 <h3 style="color: var(--secondary); margin-bottom: 15px;">Weekly Study Planner</h3>
                 <p style="color: var(--text-muted);">Add focused tasks, set deadlines, and check them off as you build momentum.</p>
                 <form class="planner-form" id="plannerForm">
@@ -550,9 +555,9 @@
                     <button class="btn" type="submit">Add task</button>
                 </form>
                 <ul class="planner-list" id="plannerList"></ul>
-            </div>
+        </div>
 
-            <div id="scholarships" class="tab-content">
+        <div id="scholarships" class="tab-content">
                 <h3 style="color: var(--secondary); margin-bottom: 15px;">Scholarship Matcher</h3>
                 <p style="color: var(--text-muted);">Filter opportunities by eligibility and save the ones you want to revisit.</p>
                 <div class="scholarship-controls">
@@ -566,9 +571,9 @@
                     </select>
                 </div>
                 <div class="scholarship-list" id="scholarshipList"></div>
-            </div>
+        </div>
 
-            <div id="activities" class="tab-content">
+        <div id="activities" class="tab-content">
                 <h3 style="color: var(--secondary); margin-bottom: 15px;">Extracurricular Activity Tracker</h3>
                 <p style="color: var(--text-muted);">Track leadership, service, clubs, and milestones in one place.</p>
                 <form class="activity-form" id="activityForm">
@@ -577,11 +582,6 @@
                     <button class="btn" type="submit">Add activity</button>
                 </form>
                 <ul class="activity-list" id="activityList"></ul>
-            </div>
-            <div class="dashboard-actions">
-                <button class="btn" id="exportButton" type="button">Export profile</button>
-                <button class="btn btn-secondary" id="editProfileButton" type="button">Edit profile</button>
-            </div>
         </div>
     </div>
     </main>
