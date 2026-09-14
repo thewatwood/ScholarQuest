@@ -321,6 +321,150 @@
             border-radius: 10px;
         }
 
+        .coach-card,
+        .quiz-card,
+        .calendar-card,
+        .achievement-card {
+            padding: 20px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.16), rgba(59, 130, 246, 0.12));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .coach-tip {
+            margin: 16px 0;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 10px;
+            margin: 18px 0;
+        }
+
+        .quiz-option {
+            padding: 13px 16px;
+            text-align: left;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 9px;
+            background: rgba(15, 23, 42, 0.55);
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        .quiz-option:hover,
+        .quiz-option.selected {
+            border-color: var(--accent);
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        .quiz-result {
+            min-height: 28px;
+            margin-top: 12px;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .calendar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+        }
+
+        .calendar-day,
+        .calendar-label {
+            min-height: 42px;
+            padding: 8px;
+            border-radius: 7px;
+            text-align: center;
+        }
+
+        .calendar-label {
+            min-height: 0;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            font-weight: bold;
+        }
+
+        .calendar-day {
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            background: rgba(15, 23, 42, 0.35);
+            color: var(--text-light);
+        }
+
+        .calendar-day.today {
+            border-color: var(--accent);
+            box-shadow: inset 0 0 0 1px var(--accent);
+        }
+
+        .calendar-day.studied {
+            background: rgba(16, 185, 129, 0.25);
+        }
+
+        .streak-number {
+            color: var(--accent);
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .achievement-card {
+            background: rgba(15, 23, 42, 0.45);
+            border-color: rgba(148, 163, 184, 0.18);
+        }
+
+        .achievement-card.unlocked {
+            border-color: var(--accent);
+            background: rgba(16, 185, 129, 0.12);
+        }
+
+        .achievement-icon {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 2rem;
+        }
+
+        .chart {
+            display: flex;
+            align-items: end;
+            gap: 10px;
+            height: 150px;
+            margin-top: 20px;
+            padding: 16px 10px 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+        }
+
+        .chart-bar {
+            flex: 1;
+            min-height: 8px;
+            border-radius: 6px 6px 0 0;
+            background: linear-gradient(var(--primary), var(--secondary));
+            position: relative;
+        }
+
+        .chart-bar span {
+            position: absolute;
+            bottom: -22px;
+            width: 100%;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-align: center;
+        }
+
         .modal-backdrop {
             display: none;
             position: fixed;
@@ -688,6 +832,10 @@
             <button class="tab-btn" type="button" aria-selected="false" aria-controls="planner" onclick="openTab(event, 'planner')">Study Planner</button>
             <button class="tab-btn" type="button" aria-selected="false" aria-controls="scholarships" onclick="openTab(event, 'scholarships')">Scholarships</button>
             <button class="tab-btn" type="button" aria-selected="false" aria-controls="activities" onclick="openTab(event, 'activities')">Activities</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="coach" onclick="openTab(event, 'coach')">AI Coach</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="quiz" onclick="openTab(event, 'quiz')">Quiz Mode</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="calendar" onclick="openTab(event, 'calendar')">Calendar</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="achievements" onclick="openTab(event, 'achievements')">Achievements</button>
         </div>
 
         <div id="quests" class="tab-content active">
@@ -766,6 +914,49 @@
                     <button class="btn" type="submit">Add activity</button>
                 </form>
                 <ul class="activity-list" id="activityList"></ul>
+        </div>
+
+        <div id="coach" class="tab-content">
+            <h3 style="color: var(--secondary); margin-bottom: 15px;">Your AI Study Coach</h3>
+            <div class="coach-card">
+                <strong id="coachGreeting">Your personalized focus plan</strong>
+                <p class="coach-tip" id="coachTip"></p>
+                <div class="dashboard-actions">
+                    <button class="btn" id="newCoachTipButton" type="button">Give me another tip</button>
+                    <button class="btn btn-secondary" id="coachTaskButton" type="button">Add this as a task</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="quiz" class="tab-content">
+            <h3 style="color: var(--secondary); margin-bottom: 15px;">Practice Quiz Mode</h3>
+            <div class="quiz-card">
+                <p><strong id="quizProgress">Question 1 of 3</strong></p>
+                <h3 id="quizQuestion" style="margin-top: 15px;"></h3>
+                <div class="quiz-options" id="quizOptions"></div>
+                <button class="btn" id="quizSubmitButton" type="button">Check answer</button>
+                <p class="quiz-result" id="quizResult" role="status"></p>
+            </div>
+        </div>
+
+        <div id="calendar" class="tab-content">
+            <h3 style="color: var(--secondary); margin-bottom: 15px;">Study Calendar</h3>
+            <div class="calendar-card">
+                <div class="calendar-header">
+                    <button class="btn btn-secondary" id="previousMonthButton" type="button" aria-label="Previous month">&larr;</button>
+                    <strong id="calendarTitle"></strong>
+                    <button class="btn btn-secondary" id="nextMonthButton" type="button" aria-label="Next month">&rarr;</button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+                <p style="margin-top: 18px;">Current study streak: <span class="streak-number" id="streakNumber">0</span> days</p>
+            </div>
+        </div>
+
+        <div id="achievements" class="tab-content">
+            <h3 style="color: var(--secondary); margin-bottom: 15px;">Achievements &amp; Growth</h3>
+            <p style="color: var(--text-muted);">Keep showing up. Every completed task, quiz, and study session builds your profile.</p>
+            <div class="achievement-grid" id="achievementGrid"></div>
+            <div class="chart" id="progressChart" aria-label="Weekly quest point chart"></div>
         </div>
     </div>
     </main>
@@ -896,6 +1087,8 @@
         const tasksStorageKey = 'scholarquest-tasks';
         const activitiesStorageKey = 'scholarquest-activities';
         const savedScholarshipsStorageKey = 'scholarquest-saved-scholarships';
+        const studyLogStorageKey = 'scholarquest-study-log';
+        const quizStorageKey = 'scholarquest-quiz';
         const profileModal = document.getElementById('profileModal');
         const profileForm = document.getElementById('profileForm');
         const loginModal = document.getElementById('loginModal');
@@ -910,6 +1103,20 @@
             { id: 'creative-voice', title: 'Creative Voice Grant', category: 'Arts', amount: '$1,000', deadline: '2026-12-10', description: 'Supports emerging artists, writers, designers, and performers with a strong creative portfolio.' },
             { id: 'lead-forward', title: 'Lead Forward Scholarship', category: 'Leadership', amount: '$3,000', deadline: '2027-01-20', description: 'For students who demonstrate leadership, initiative, and a plan to improve their communities.' }
         ];
+        const coachTips = [
+            'Use a 25-minute focus sprint, then take a five-minute break before starting another round.',
+            'Review one missed question from yesterday before learning anything new today.',
+            'Explain a difficult concept out loud as if you were teaching a study partner.',
+            'Pair your next study session with a specific deliverable, such as ten flashcards or one practice essay.'
+        ];
+        const quizQuestions = [
+            { question: 'Which skill is most important when writing an AP history synthesis response?', options: ['Memorizing every date', 'Connecting evidence across historical periods', 'Writing the longest possible response', 'Avoiding specific evidence'], answer: 1 },
+            { question: 'What is a strong first step when planning a large assignment?', options: ['Wait until the night before', 'Break it into smaller milestones', 'Skip the instructions', 'Work without a deadline'], answer: 1 },
+            { question: 'Which habit best supports long-term retention?', options: ['Spaced review', 'One massive study session', 'Only rereading notes', 'Never testing yourself'], answer: 0 }
+        ];
+        let coachTipIndex = 0;
+        let calendarDate = new Date();
+        let quizState = { index: 0, selected: null, score: 0 };
 
         function showToast(message) {
             toast.textContent = message;
@@ -928,6 +1135,30 @@
 
         function saveCollection(key, value) {
             localStorage.setItem(key, JSON.stringify(value));
+        }
+
+        function todayKey(date = new Date()) {
+            return date.toISOString().slice(0, 10);
+        }
+
+        function markStudyDay() {
+            const days = readCollection(studyLogStorageKey);
+            const today = todayKey();
+            if (!days.includes(today)) {
+                days.push(today);
+                saveCollection(studyLogStorageKey, days);
+            }
+        }
+
+        function calculateStreak() {
+            const days = new Set(readCollection(studyLogStorageKey));
+            let cursor = new Date();
+            let streak = 0;
+            while (days.has(todayKey(cursor))) {
+                streak += 1;
+                cursor.setDate(cursor.getDate() - 1);
+            }
+            return streak;
         }
 
         function updateStats() {
@@ -1016,6 +1247,74 @@
             if (tabName === 'planner') renderTasks();
             if (tabName === 'scholarships') renderScholarships();
             if (tabName === 'activities') renderActivities();
+            if (tabName === 'coach') renderCoach();
+            if (tabName === 'quiz') renderQuiz();
+            if (tabName === 'calendar') renderCalendar();
+            if (tabName === 'achievements') renderAchievements();
+        }
+
+        function renderCoach() {
+            const profile = JSON.parse(localStorage.getItem(profileStorageKey) || '{}');
+            document.getElementById('coachGreeting').textContent = profile.name ? `${profile.name}'s personalized focus plan` : 'Your personalized focus plan';
+            document.getElementById('coachTip').textContent = coachTips[coachTipIndex];
+        }
+
+        function renderQuiz() {
+            const current = quizQuestions[quizState.index];
+            document.getElementById('quizProgress').textContent = `Question ${quizState.index + 1} of ${quizQuestions.length}`;
+            document.getElementById('quizQuestion').textContent = current.question;
+            document.getElementById('quizResult').textContent = '';
+            const options = document.getElementById('quizOptions');
+            options.innerHTML = '';
+            current.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = `quiz-option${quizState.selected === index ? ' selected' : ''}`;
+                button.type = 'button';
+                button.textContent = option;
+                button.addEventListener('click', () => {
+                    quizState.selected = index;
+                    renderQuiz();
+                });
+                options.appendChild(button);
+            });
+        }
+
+        function renderCalendar() {
+            const year = calendarDate.getFullYear();
+            const month = calendarDate.getMonth();
+            document.getElementById('calendarTitle').textContent = calendarDate.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => `<span class="calendar-label">${day}</span>`).join('');
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const studyDays = new Set(readCollection(studyLogStorageKey));
+            for (let index = 0; index < firstDay; index += 1) grid.appendChild(document.createElement('span'));
+            for (let day = 1; day <= daysInMonth; day += 1) {
+                const cell = document.createElement('span');
+                const date = new Date(year, month, day);
+                const key = todayKey(date);
+                cell.className = `calendar-day${key === todayKey() ? ' today' : ''}${studyDays.has(key) ? ' studied' : ''}`;
+                cell.textContent = day;
+                grid.appendChild(cell);
+            }
+            document.getElementById('streakNumber').textContent = calculateStreak();
+        }
+
+        function renderAchievements() {
+            const progress = getProgress();
+            const tasks = readCollection(tasksStorageKey);
+            const completedTasks = tasks.filter((task) => task.done).length;
+            const quiz = JSON.parse(localStorage.getItem(quizStorageKey) || '{"best":0}');
+            const achievements = [
+                { icon: '🔥', title: 'First Step', detail: 'Study for one day', unlocked: readCollection(studyLogStorageKey).length >= 1 },
+                { icon: '✅', title: 'Task Tamer', detail: 'Complete three tasks', unlocked: completedTasks >= 3 },
+                { icon: '🧠', title: 'Quiz Scholar', detail: 'Score 3/3 on a quiz', unlocked: quiz.best >= 3 },
+                { icon: '⭐', title: 'Quest Builder', detail: 'Earn 100 points', unlocked: progress.points >= 100 }
+            ];
+            document.getElementById('achievementGrid').innerHTML = achievements.map((item) => `<div class="achievement-card${item.unlocked ? ' unlocked' : ''}"><span class="achievement-icon">${item.icon}</span><strong>${item.title}</strong><span class="item-meta">${item.unlocked ? 'Unlocked' : item.detail}</span></div>`).join('');
+            const chart = document.getElementById('progressChart');
+            const values = [0, 0, 0, 0, 0, 0, progress.points];
+            chart.innerHTML = values.map((value, index) => `<div class="chart-bar" style="height: ${Math.max(8, Math.min(100, value / 2))}%"><span>${index === 6 ? 'Today' : `D-${6 - index}`}</span></div>`).join('');
         }
 
         function renderTasks() {
@@ -1140,13 +1439,15 @@
         });
         document.getElementById('resetDataButton').addEventListener('click', () => {
             if (!window.confirm('Reset all ScholarQuest data on this device?')) return;
-            [profileStorageKey, progressStorageKey, tasksStorageKey, activitiesStorageKey, savedScholarshipsStorageKey].forEach((key) => localStorage.removeItem(key));
+            [profileStorageKey, progressStorageKey, tasksStorageKey, activitiesStorageKey, savedScholarshipsStorageKey, studyLogStorageKey, quizStorageKey].forEach((key) => localStorage.removeItem(key));
             localStorage.removeItem(settingsStorageKey);
             applySettings();
             updateStats();
             renderTasks();
             renderScholarships();
             renderActivities();
+            renderCalendar();
+            renderAchievements();
             closeSettingsModal();
             showToast('Your local app data was reset.');
         });
@@ -1177,10 +1478,12 @@
         document.getElementById('completeGoalButton').addEventListener('click', () => {
             const progress = getProgress();
             if (!progress.goalComplete) {
+                markStudyDay();
                 progress.goalComplete = true;
                 progress.points += 100;
                 localStorage.setItem(progressStorageKey, JSON.stringify(progress));
                 updateStats();
+                renderAchievements();
                 showToast('Study goal completed! +100 quest points.');
             } else {
                 showToast('This study goal is already complete.');
@@ -1197,9 +1500,64 @@
             const progress = getProgress();
             progress.hours += 1;
             progress.points += 25;
+            markStudyDay();
             localStorage.setItem(progressStorageKey, JSON.stringify(progress));
             updateStats();
+            renderAchievements();
             showToast('Volunteer hour logged! +25 quest points.');
+        });
+
+        document.getElementById('newCoachTipButton').addEventListener('click', () => {
+            coachTipIndex = (coachTipIndex + 1) % coachTips.length;
+            renderCoach();
+        });
+
+        document.getElementById('coachTaskButton').addEventListener('click', () => {
+            const tasks = readCollection(tasksStorageKey);
+            tasks.push({ id: Date.now(), title: coachTips[coachTipIndex], date: todayKey(), done: false });
+            saveCollection(tasksStorageKey, tasks);
+            showToast('Coach tip added to your planner.');
+        });
+
+        document.getElementById('quizSubmitButton').addEventListener('click', () => {
+            if (quizState.selected === null) {
+                document.getElementById('quizResult').textContent = 'Choose an answer first.';
+                return;
+            }
+            const current = quizQuestions[quizState.index];
+            if (quizState.selected === current.answer) {
+                quizState.score += 1;
+                document.getElementById('quizResult').textContent = 'Correct! Nice work.';
+            } else {
+                document.getElementById('quizResult').textContent = `Not quite. Correct answer: ${current.options[current.answer]}`;
+            }
+            if (quizState.index === quizQuestions.length - 1) {
+                const quiz = JSON.parse(localStorage.getItem(quizStorageKey) || '{"best":0}');
+                quiz.best = Math.max(quiz.best, quizState.score);
+                localStorage.setItem(quizStorageKey, JSON.stringify(quiz));
+                const progress = getProgress();
+                progress.points += quizState.score * 10;
+                saveCollection(progressStorageKey, progress);
+                markStudyDay();
+                updateStats();
+                renderAchievements();
+                showToast(`Quiz finished: ${quizState.score}/${quizQuestions.length}.`);
+                quizState = { index: 0, selected: null, score: 0 };
+                return;
+            }
+            quizState.index += 1;
+            quizState.selected = null;
+            setTimeout(renderQuiz, 700);
+        });
+
+        document.getElementById('previousMonthButton').addEventListener('click', () => {
+            calendarDate.setMonth(calendarDate.getMonth() - 1);
+            renderCalendar();
+        });
+
+        document.getElementById('nextMonthButton').addEventListener('click', () => {
+            calendarDate.setMonth(calendarDate.getMonth() + 1);
+            renderCalendar();
         });
 
         document.getElementById('exportButton').addEventListener('click', () => {
@@ -1229,8 +1587,10 @@
             const tasks = readCollection(tasksStorageKey);
             tasks.push({ id: Date.now(), title: data.task, date: data.date, done: false });
             saveCollection(tasksStorageKey, tasks);
+            markStudyDay();
             event.currentTarget.reset();
             renderTasks();
+            renderCalendar();
             showToast('Study task added.');
         });
 
@@ -1248,6 +1608,11 @@
             showToast('Activity added to your profile.');
         });
 
+        applySettings();
+        renderCoach();
+        renderQuiz();
+        renderCalendar();
+        renderAchievements();
         updateStats();
         renderTasks();
         renderScholarships();
