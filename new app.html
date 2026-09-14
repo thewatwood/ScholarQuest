@@ -568,6 +568,23 @@
             box-shadow: none;
         }
 
+        .google-auth-actions {
+            display: grid;
+            gap: 10px;
+        }
+
+        .google-signup-button {
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            box-shadow: none;
+        }
+
+        .google-signup-button:hover {
+            background: rgba(148, 163, 184, 0.12);
+            box-shadow: none;
+        }
+
         .settings-modal {
             width: min(100%, 620px);
         }
@@ -1015,7 +1032,14 @@
                 <button class="btn" type="submit">Log in with email</button>
             </form>
             <div class="login-divider">or</div>
-            <button class="btn gmail-button" id="gmailLoginButton" type="button">Continue with Gmail</button>
+            <div class="google-auth-actions" aria-label="Google account options">
+                <button class="btn gmail-button" id="gmailLoginButton" type="button">
+                    <span aria-hidden="true">G</span> Log in with Google
+                </button>
+                <button class="btn google-signup-button" id="googleSignupButton" type="button">
+                    <span aria-hidden="true">G</span> Sign up with Google
+                </button>
+            </div>
             <p class="form-message" id="loginMessage" role="status"></p>
         </div>
     </div>
@@ -1470,9 +1494,17 @@
             showToast('Email login form submitted.');
         });
 
+        function showGoogleAuthSetupMessage(action) {
+            document.getElementById('loginMessage').textContent = `${action} with Google is not configured yet. Add a valid Google OAuth client ID and authorized website origin before enabling it.`;
+            showToast('Google account setup is required.');
+        }
+
         document.getElementById('gmailLoginButton').addEventListener('click', () => {
-            document.getElementById('loginMessage').textContent = 'Gmail sign-in is not configured yet. Add a valid Google OAuth client ID and authorized website origin before enabling it.';
-            showToast('Gmail sign-in setup is required.');
+            showGoogleAuthSetupMessage('Logging in');
+        });
+
+        document.getElementById('googleSignupButton').addEventListener('click', () => {
+            showGoogleAuthSetupMessage('Signing up');
         });
 
         document.getElementById('completeGoalButton').addEventListener('click', () => {
