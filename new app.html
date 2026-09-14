@@ -1,4 +1,3 @@
-Scholar quest(combination of gapify and extra maxxer)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,6 +40,16 @@ Scholar quest(combination of gapify and extra maxxer)
             top: 0;
             z-index: 100;
             border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        main {
+            min-height: calc(100vh - 145px);
         }
 
         .logo {
@@ -91,6 +100,37 @@ Scholar quest(combination of gapify and extra maxxer)
         .btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(139, 92, 246, 0.6);
+        }
+
+        .btn:focus-visible,
+        .tab-btn:focus-visible,
+        input:focus-visible,
+        select:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(139, 92, 246, 0.65);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(139, 92, 246, 0.15);
+            box-shadow: none;
+        }
+
+        .settings-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            font-size: 1rem;
+        }
+
+        .settings-icon {
+            font-size: 1.15rem;
         }
 
         /* Features Grid */
@@ -164,6 +204,538 @@ Scholar quest(combination of gapify and extra maxxer)
             animation: fadeIn 0.5s;
         }
 
+        .dashboard-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .dashboard-actions .btn {
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .stat-card {
+            padding: 18px;
+            background: rgba(15, 23, 42, 0.55);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-card strong {
+            display: block;
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        .planner-form,
+        .activity-form,
+        .scholarship-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .planner-form input,
+        .activity-form input,
+        .scholarship-controls input,
+        .scholarship-controls select {
+            flex: 1 1 180px;
+            min-width: 0;
+            padding: 11px 13px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 8px;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .planner-list,
+        .activity-list,
+        .scholarship-list {
+            display: grid;
+            gap: 12px;
+            list-style: none;
+        }
+
+        .planner-item,
+        .activity-item,
+        .scholarship-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 16px;
+            border-radius: 10px;
+            background: rgba(15, 23, 42, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .planner-item.done {
+            opacity: 0.65;
+        }
+
+        .planner-item.done .item-title {
+            text-decoration: line-through;
+        }
+
+        .item-title {
+            font-weight: bold;
+        }
+
+        .item-meta {
+            display: block;
+            margin-top: 4px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .scholarship-card {
+            align-items: flex-start;
+        }
+
+        .scholarship-card h4 {
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .scholarship-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .empty-state {
+            padding: 18px;
+            color: var(--text-muted);
+            text-align: center;
+            border: 1px dashed rgba(148, 163, 184, 0.35);
+            border-radius: 10px;
+        }
+
+        .coach-card,
+        .quiz-card,
+        .calendar-card,
+        .achievement-card {
+            padding: 20px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.16), rgba(59, 130, 246, 0.12));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .coach-tip {
+            margin: 16px 0;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 10px;
+            margin: 18px 0;
+        }
+
+        .quiz-option {
+            padding: 13px 16px;
+            text-align: left;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 9px;
+            background: rgba(15, 23, 42, 0.55);
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        .quiz-option:hover,
+        .quiz-option.selected {
+            border-color: var(--accent);
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        .quiz-result {
+            min-height: 28px;
+            margin-top: 12px;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .calendar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+        }
+
+        .calendar-day,
+        .calendar-label {
+            min-height: 42px;
+            padding: 8px;
+            border-radius: 7px;
+            text-align: center;
+        }
+
+        .calendar-label {
+            min-height: 0;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            font-weight: bold;
+        }
+
+        .calendar-day {
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            background: rgba(15, 23, 42, 0.35);
+            color: var(--text-light);
+        }
+
+        .calendar-day.today {
+            border-color: var(--accent);
+            box-shadow: inset 0 0 0 1px var(--accent);
+        }
+
+        .calendar-day.studied {
+            background: rgba(16, 185, 129, 0.25);
+        }
+
+        .streak-number {
+            color: var(--accent);
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .achievement-card {
+            background: rgba(15, 23, 42, 0.45);
+            border-color: rgba(148, 163, 184, 0.18);
+        }
+
+        .achievement-card.unlocked {
+            border-color: var(--accent);
+            background: rgba(16, 185, 129, 0.12);
+        }
+
+        .achievement-icon {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 2rem;
+        }
+
+        .chart {
+            display: flex;
+            align-items: end;
+            gap: 10px;
+            height: 150px;
+            margin-top: 20px;
+            padding: 16px 10px 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+        }
+
+        .chart-bar {
+            flex: 1;
+            min-height: 8px;
+            border-radius: 6px 6px 0 0;
+            background: linear-gradient(var(--primary), var(--secondary));
+            position: relative;
+        }
+
+        .chart-bar span {
+            position: absolute;
+            bottom: -22px;
+            width: 100%;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-align: center;
+        }
+
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            padding: 20px;
+            background: rgba(2, 6, 23, 0.82);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal {
+            width: min(100%, 520px);
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 32px;
+            background: var(--bg-card);
+            border: 1px solid rgba(139, 92, 246, 0.45);
+            border-radius: 18px;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.45);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .modal-header h2 {
+            color: var(--text-light);
+        }
+
+        .close-modal {
+            padding: 4px 10px;
+            border: 0;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 1.7rem;
+            cursor: pointer;
+        }
+
+        .form-field {
+            display: grid;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .form-field label {
+            font-weight: bold;
+        }
+
+        .form-field input,
+        .form-field select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 8px;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .form-message {
+            min-height: 24px;
+            margin-top: 14px;
+            color: var(--accent);
+        }
+
+        .login-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .login-divider::before,
+        .login-divider::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: rgba(148, 163, 184, 0.35);
+        }
+
+        .gmail-button {
+            width: 100%;
+            background: white;
+            color: #1f2937;
+            box-shadow: none;
+        }
+
+        .gmail-button:hover {
+            background: #f1f5f9;
+            box-shadow: none;
+        }
+
+        .google-auth-actions {
+            display: grid;
+            gap: 10px;
+        }
+
+        .google-signup-button {
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            box-shadow: none;
+        }
+
+        .google-signup-button:hover {
+            background: rgba(148, 163, 184, 0.12);
+            box-shadow: none;
+        }
+
+        .settings-modal {
+            width: min(100%, 620px);
+        }
+
+        .settings-intro {
+            margin: -10px 0 22px;
+            color: var(--text-muted);
+        }
+
+        .settings-section {
+            padding: 18px 0;
+            border-top: 1px solid rgba(148, 163, 184, 0.18);
+        }
+
+        .settings-section:first-of-type {
+            border-top: 0;
+        }
+
+        .settings-section h3 {
+            margin-bottom: 12px;
+            color: var(--secondary);
+        }
+
+        .setting-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 12px 0;
+        }
+
+        .setting-copy strong,
+        .setting-copy span {
+            display: block;
+        }
+
+        .setting-copy span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .setting-select {
+            min-width: 150px;
+            padding: 9px 12px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 8px;
+            background: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        .toggle {
+            position: relative;
+            width: 48px;
+            height: 26px;
+            flex: 0 0 auto;
+        }
+
+        .toggle input {
+            width: 0;
+            height: 0;
+            opacity: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            inset: 0;
+            cursor: pointer;
+            border-radius: 20px;
+            background: #475569;
+            transition: 0.2s;
+        }
+
+        .toggle-slider::before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: 3px;
+            top: 3px;
+            border-radius: 50%;
+            background: white;
+            transition: 0.2s;
+        }
+
+        .toggle input:checked + .toggle-slider {
+            background: var(--accent);
+        }
+
+        .toggle input:checked + .toggle-slider::before {
+            transform: translateX(22px);
+        }
+
+        .danger-button {
+            color: #fecaca;
+            border-color: rgba(248, 113, 113, 0.55);
+        }
+
+        body.light-theme {
+            --bg-dark: #eef2ff;
+            --bg-card: #ffffff;
+            --text-light: #172033;
+            --text-muted: #526078;
+        }
+
+        body.light-theme nav,
+        body.light-theme footer {
+            background-color: #e0e7ff;
+        }
+
+        body.light-theme .hero {
+            background-image: radial-gradient(circle at center, #ddd6fe, var(--bg-dark));
+        }
+
+        body.compact-mode .features {
+            padding-top: 42px;
+            padding-bottom: 42px;
+            gap: 18px;
+        }
+
+        body.compact-mode .feature-card {
+            padding: 20px;
+        }
+
+        body.reduced-motion *,
+        body.reduced-motion *::before,
+        body.reduced-motion *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            scroll-behavior: auto !important;
+            transition-duration: 0.01ms !important;
+        }
+
+        .toast {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 300;
+            max-width: 340px;
+            padding: 14px 18px;
+            border-radius: 10px;
+            background: var(--accent);
+            color: #052e1b;
+            font-weight: bold;
+            transform: translateY(120px);
+            transition: transform 0.25s ease;
+        }
+
+        .toast.visible {
+            transform: translateY(0);
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -175,22 +747,72 @@ Scholar quest(combination of gapify and extra maxxer)
             background-color: #0b1120;
             color: var(--text-muted);
         }
+
+        @media (max-width: 640px) {
+            nav {
+                padding: 16px 20px;
+            }
+
+            .logo {
+                font-size: 1.35rem;
+            }
+
+            nav .btn {
+                padding: 8px 14px !important;
+                font-size: 0.85rem !important;
+            }
+
+            .hero {
+                padding: 70px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .features {
+                padding: 50px 20px;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                padding: 15px;
+            }
+
+            .tab-content {
+                padding: 28px 22px;
+            }
+
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="logo">ScholarQuest</div>
-        <a href="#" class="btn" style="padding: 10px 25px; font-size: 1rem;">Login / Get Started</a>
+        <div class="nav-actions">
+            <button class="btn btn-secondary settings-button" id="settingsButton" type="button" aria-label="Open settings">
+                <span class="settings-icon" aria-hidden="true">⚙</span> Settings
+            </button>
+            <button class="btn" id="loginButton" type="button" style="padding: 10px 25px; font-size: 1rem;">Login / Get Started</button>
+        </div>
     </nav>
 
-    <header class="hero">
-        <h1>Turn studying fun</h1>
+    <main>
+      <header class="hero">
+        <h1>Make studying fun</h1>
         <p>Master AP subjects, engage in meaningful extracurriculars, and build your ultimate college profile. ScholarQuest merges adaptive AI studying with intelligent activity matchmaking to turn rigorous academic review and resume building into an engaging, rewarding experience.</p>
-        <button class="btn">Create Your Profile</button>
-    </header>
+        <button class="btn" id="profileButton" type="button">Create Your Profile</button>
+      </header>
 
-    <section class="features">
+    <section class="features" aria-labelledby="features-heading">
+        <h2 id="features-heading" hidden>ScholarQuest features</h2>
         <div class="feature-card">
             <h3>📚 Interactive Learning</h3>
             <p>Master subject-themed modules. Complete challenges and earn milestone rewards by mastering AP practice questions tracked by our adaptive AI study engine.</p>
@@ -204,7 +826,7 @@ Scholar quest(combination of gapify and extra maxxer)
             <p>Seamlessly log hours, upload proof of participation, and automatically export your achievements into a formatted resume or Common App activity list.</p>
         </div>
         <div class="feature-card">
-            <h3>🤖 AI Mentor & Skill Tracking</h3>
+            <h3>🤖 AI Mentor &amp; Skill Tracking</h3>
             <p>Consult the AI Counselor for personalized goals. Track your academic growth in AP classes alongside your leadership development in clubs.</p>
         </div>
         <div class="feature-card">
@@ -221,24 +843,38 @@ Scholar quest(combination of gapify and extra maxxer)
     <h2 style="text-align: center; margin-top: 50px; color: var(--primary);">Student Dashboard Preview</h2>
     <div class="dashboard-preview">
         <div class="tabs">
-            <button class="tab-btn active" onclick="openTab(event, 'quests')">Active Goals</button>
-            <button class="tab-btn" onclick="openTab(event, 'guild')">Extracurriculars</button>
-            <button class="tab-btn" onclick="openTab(event, 'stats')">Profile Stats</button>
+            <button class="tab-btn active" type="button" aria-selected="true" aria-controls="quests" onclick="openTab(event, 'quests')">Active Goals</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="guild" onclick="openTab(event, 'guild')">Extracurriculars</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="stats" onclick="openTab(event, 'stats')">Profile Stats</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="planner" onclick="openTab(event, 'planner')">Study Planner</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="scholarships" onclick="openTab(event, 'scholarships')">Scholarships</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="activities" onclick="openTab(event, 'activities')">Activities</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="coach" onclick="openTab(event, 'coach')">AI Coach</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="quiz" onclick="openTab(event, 'quiz')">Quiz Mode</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="calendar" onclick="openTab(event, 'calendar')">Calendar</button>
+            <button class="tab-btn" type="button" aria-selected="false" aria-controls="achievements" onclick="openTab(event, 'achievements')">Achievements</button>
         </div>
-        
+
         <div id="quests" class="tab-content active">
             <h3 style="color: var(--secondary); margin-bottom: 15px;">AP US History: Unit 6 Challenge</h3>
-            <p><strong>Progress:</strong> 75% Completion</p>
+            <p id="progressText"><strong>Progress:</strong> 75% Completion</p>
             <div style="background: #333; height: 20px; border-radius: 10px; margin: 10px 0 20px 0; overflow: hidden;">
                 <div style="background: var(--accent); width: 75%; height: 100%;"></div>
             </div>
             <p><em>AI Mentor Tip: "Focus on the Gilded Age chapter to improve your historical synthesis score!"</em></p>
+            <div class="dashboard-actions">
+                <button class="btn" id="completeGoalButton" type="button">Complete study goal</button>
+                <button class="btn btn-secondary" id="resetProgressButton" type="button">Reset progress</button>
+            </div>
         </div>
 
         <div id="guild" class="tab-content">
             <h3 style="color: var(--secondary); margin-bottom: 15px;">Activity: Local Animal Shelter</h3>
             <p><strong>Hours Logged:</strong> 42 / 50 for Next Milestone</p>
             <p style="color: var(--text-muted); margin-top: 10px;">Upload proof of your latest shift to earn the "Community Leader" badge and unlock new tailored scholarship opportunities.</p>
+            <div class="dashboard-actions">
+                <button class="btn" id="logHoursButton" type="button">Log 1 volunteer hour</button>
+            </div>
         </div>
 
         <div id="stats" class="tab-content">
@@ -248,9 +884,221 @@ Scholar quest(combination of gapify and extra maxxer)
                 <li>President of the Robotics Club</li>
                 <li>Leadership Score: 85/100</li>
             </ul>
-            <button class="btn" style="padding: 10px 20px; font-size: 1rem;">Export to Common App</button>
+            <div class="stat-grid">
+                <div class="stat-card"><strong id="profileName">Guest</strong>Name</div>
+                <div class="stat-card"><strong id="profilePoints">0</strong>Quest points</div>
+                <div class="stat-card"><strong id="profileHours">42</strong>Volunteer hours</div>
+            </div>
+            <div class="dashboard-actions">
+                <button class="btn" id="exportButton" type="button">Export profile</button>
+                <button class="btn btn-secondary" id="editProfileButton" type="button">Edit profile</button>
+            </div>
+        </div>
+
+        <div id="planner" class="tab-content">
+                <h3 style="color: var(--secondary); margin-bottom: 15px;">Weekly Study Planner</h3>
+                <p style="color: var(--text-muted);">Add focused tasks, set deadlines, and check them off as you build momentum.</p>
+                <form class="planner-form" id="plannerForm">
+                    <input id="taskInput" name="task" placeholder="e.g. Review APUSH Unit 6" required maxlength="100">
+                    <input id="taskDateInput" name="date" type="date" required>
+                    <button class="btn" type="submit">Add task</button>
+                </form>
+                <ul class="planner-list" id="plannerList"></ul>
+        </div>
+
+        <div id="scholarships" class="tab-content">
+                <h3 style="color: var(--secondary); margin-bottom: 15px;">Scholarship Matcher</h3>
+                <p style="color: var(--text-muted);">Filter opportunities by eligibility and save the ones you want to revisit.</p>
+                <div class="scholarship-controls">
+                    <input id="scholarshipSearch" placeholder="Search scholarships" aria-label="Search scholarships">
+                    <select id="scholarshipCategory" aria-label="Filter scholarships by category">
+                        <option value="all">All categories</option>
+                        <option value="STEM">STEM</option>
+                        <option value="Service">Community service</option>
+                        <option value="Arts">Arts</option>
+                        <option value="Leadership">Leadership</option>
+                    </select>
+                </div>
+                <div class="scholarship-list" id="scholarshipList"></div>
+        </div>
+
+        <div id="activities" class="tab-content">
+                <h3 style="color: var(--secondary); margin-bottom: 15px;">Extracurricular Activity Tracker</h3>
+                <p style="color: var(--text-muted);">Track leadership, service, clubs, and milestones in one place.</p>
+                <form class="activity-form" id="activityForm">
+                    <input id="activityInput" name="activity" placeholder="e.g. Robotics Club" required maxlength="80">
+                    <input id="activityHoursInput" name="hours" type="number" min="0" max="9999" placeholder="Hours" required>
+                    <button class="btn" type="submit">Add activity</button>
+                </form>
+                <ul class="activity-list" id="activityList"></ul>
+        </div>
+
+        <div id="coach" class="tab-content">
+            <h3 style="color: var(--secondary); margin-bottom: 15px;">Your AI Study Coach</h3>
+            <div class="coach-card">
+                <strong id="coachGreeting">Your personalized focus plan</strong>
+                <p class="coach-tip" id="coachTip"></p>
+                <div class="dashboard-actions">
+                    <button class="btn" id="newCoachTipButton" type="button">Give me another tip</button>
+                    <button class="btn btn-secondary" id="coachTaskButton" type="button">Add this as a task</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="quiz" class="tab-content">
+            <h3 style="color: var(--secondary); margin-bottom: 15px;">Practice Quiz Mode</h3>
+            <div class="quiz-card">
+                <p><strong id="quizProgress">Question 1 of 3</strong></p>
+                <h3 id="quizQuestion" style="margin-top: 15px;"></h3>
+                <div class="quiz-options" id="quizOptions"></div>
+                <button class="btn" id="quizSubmitButton" type="button">Check answer</button>
+                <p class="quiz-result" id="quizResult" role="status"></p>
+            </div>
+        </div>
+
+        <div id="calendar" class="tab-content">
+            <h3 style="color: var(--secondary); margin-bottom: 15px;">Study Calendar</h3>
+            <div class="calendar-card">
+                <div class="calendar-header">
+                    <button class="btn btn-secondary" id="previousMonthButton" type="button" aria-label="Previous month">&larr;</button>
+                    <strong id="calendarTitle"></strong>
+                    <button class="btn btn-secondary" id="nextMonthButton" type="button" aria-label="Next month">&rarr;</button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+                <p style="margin-top: 18px;">Current study streak: <span class="streak-number" id="streakNumber">0</span> days</p>
+            </div>
+        </div>
+
+        <div id="achievements" class="tab-content">
+            <h3 style="color: var(--secondary); margin-bottom: 15px;">Achievements &amp; Growth</h3>
+            <p style="color: var(--text-muted);">Keep showing up. Every completed task, quiz, and study session builds your profile.</p>
+            <div class="achievement-grid" id="achievementGrid"></div>
+            <div class="chart" id="progressChart" aria-label="Weekly quest point chart"></div>
         </div>
     </div>
+    </main>
+
+    <div class="modal-backdrop" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileModalTitle">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="profileModalTitle">Build your ScholarQuest profile</h2>
+                <button class="close-modal" type="button" aria-label="Close profile form">&times;</button>
+            </div>
+            <form id="profileForm">
+                <div class="form-field">
+                    <label for="nameInput">Your name</label>
+                    <input id="nameInput" name="name" required maxlength="60" autocomplete="name">
+                </div>
+                <div class="form-field">
+                    <label for="gradeInput">Grade</label>
+                    <select id="gradeInput" name="grade" required>
+                        <option value="">Choose your grade</option>
+                        <option>9th grade</option>
+                        <option>10th grade</option>
+                        <option>11th grade</option>
+                        <option>12th grade</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label for="interestInput">Primary interest</label>
+                    <select id="interestInput" name="interest" required>
+                        <option value="">Choose an interest</option>
+                        <option>STEM</option>
+                        <option>Arts and humanities</option>
+                        <option>Community service</option>
+                        <option>Business and leadership</option>
+                    </select>
+                </div>
+                <button class="btn" type="submit">Save profile</button>
+                <p class="form-message" id="formMessage" role="status"></p>
+            </form>
+        </div>
+    </div>
+    <div class="modal-backdrop" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="loginModalTitle">Log in to ScholarQuest</h2>
+                <button class="close-modal" id="closeLoginButton" type="button" aria-label="Close login form">&times;</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-field">
+                    <label for="loginEmailInput">Account email</label>
+                    <input id="loginEmailInput" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
+                </div>
+                <div class="form-field">
+                    <label for="loginPasswordInput">Password</label>
+                    <input id="loginPasswordInput" name="password" type="password" required minlength="8" autocomplete="current-password" placeholder="Enter your password">
+                </div>
+                <button class="btn" type="submit">Log in with email</button>
+            </form>
+            <div class="login-divider">or</div>
+            <div class="google-auth-actions" aria-label="Google account options">
+                <button class="btn gmail-button" id="gmailLoginButton" type="button">
+                    <span aria-hidden="true">G</span> Log in with Google
+                </button>
+                <button class="btn google-signup-button" id="googleSignupButton" type="button">
+                    <span aria-hidden="true">G</span> Sign up with Google
+                </button>
+            </div>
+            <p class="form-message" id="loginMessage" role="status"></p>
+        </div>
+    </div>
+    <div class="modal-backdrop" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsModalTitle">
+        <div class="modal settings-modal">
+            <div class="modal-header">
+                <h2 id="settingsModalTitle">Personalize your quest</h2>
+                <button class="close-modal" id="closeSettingsButton" type="button" aria-label="Close settings">&times;</button>
+            </div>
+            <p class="settings-intro">Make ScholarQuest feel like your own study space. Your preferences stay on this device.</p>
+            <section class="settings-section" aria-labelledby="appearanceHeading">
+                <h3 id="appearanceHeading">Appearance</h3>
+                <div class="setting-row">
+                    <div class="setting-copy">
+                        <strong>Color theme</strong>
+                        <span>Choose the mood for your dashboard.</span>
+                    </div>
+                    <select class="setting-select" id="themeSelect" aria-label="Color theme">
+                        <option value="dark">Midnight</option>
+                        <option value="light">Daylight</option>
+                    </select>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-copy">
+                        <strong>Compact layout</strong>
+                        <span>Fit more cards and content on screen.</span>
+                    </div>
+                    <label class="toggle">
+                        <input id="compactToggle" type="checkbox">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </section>
+            <section class="settings-section" aria-labelledby="accessibilityHeading">
+                <h3 id="accessibilityHeading">Focus and accessibility</h3>
+                <div class="setting-row">
+                    <div class="setting-copy">
+                        <strong>Reduce motion</strong>
+                        <span>Soften animations across the app.</span>
+                    </div>
+                    <label class="toggle">
+                        <input id="motionToggle" type="checkbox">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </section>
+            <section class="settings-section" aria-labelledby="dataHeading">
+                <h3 id="dataHeading">Local data</h3>
+                <div class="setting-row">
+                    <div class="setting-copy">
+                        <strong>Reset app data</strong>
+                        <span>Delete this device's profile, tasks, saved scholarships, and activities.</span>
+                    </div>
+                    <button class="btn btn-secondary danger-button" id="resetDataButton" type="button">Reset data</button>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
 
     <footer>
         <p>&copy; 2026 ScholarQuest. Master your education.</p>
@@ -258,6 +1106,149 @@ Scholar quest(combination of gapify and extra maxxer)
 
     <!-- JavaScript for Tabs -->
     <script>
+        const profileStorageKey = 'scholarquest-profile';
+        const progressStorageKey = 'scholarquest-progress';
+        const tasksStorageKey = 'scholarquest-tasks';
+        const activitiesStorageKey = 'scholarquest-activities';
+        const savedScholarshipsStorageKey = 'scholarquest-saved-scholarships';
+        const studyLogStorageKey = 'scholarquest-study-log';
+        const quizStorageKey = 'scholarquest-quiz';
+        const profileModal = document.getElementById('profileModal');
+        const profileForm = document.getElementById('profileForm');
+        const loginModal = document.getElementById('loginModal');
+        const loginForm = document.getElementById('loginForm');
+        const settingsModal = document.getElementById('settingsModal');
+        const toast = document.getElementById('toast');
+        const settingsStorageKey = 'scholarquest-settings';
+        let toastTimer;
+        const scholarships = [
+            { id: 'stem-future', title: 'Future Builders STEM Award', category: 'STEM', amount: '$2,500', deadline: '2026-10-15', description: 'For students building practical solutions through science, technology, engineering, or math.' },
+            { id: 'service-impact', title: 'Community Impact Scholarship', category: 'Service', amount: '$1,500', deadline: '2026-11-01', description: 'Recognizes students who have made a measurable difference through consistent community service.' },
+            { id: 'creative-voice', title: 'Creative Voice Grant', category: 'Arts', amount: '$1,000', deadline: '2026-12-10', description: 'Supports emerging artists, writers, designers, and performers with a strong creative portfolio.' },
+            { id: 'lead-forward', title: 'Lead Forward Scholarship', category: 'Leadership', amount: '$3,000', deadline: '2027-01-20', description: 'For students who demonstrate leadership, initiative, and a plan to improve their communities.' }
+        ];
+        const coachTips = [
+            'Use a 25-minute focus sprint, then take a five-minute break before starting another round.',
+            'Review one missed question from yesterday before learning anything new today.',
+            'Explain a difficult concept out loud as if you were teaching a study partner.',
+            'Pair your next study session with a specific deliverable, such as ten flashcards or one practice essay.'
+        ];
+        const quizQuestions = [
+            { question: 'Which skill is most important when writing an AP history synthesis response?', options: ['Memorizing every date', 'Connecting evidence across historical periods', 'Writing the longest possible response', 'Avoiding specific evidence'], answer: 1 },
+            { question: 'What is a strong first step when planning a large assignment?', options: ['Wait until the night before', 'Break it into smaller milestones', 'Skip the instructions', 'Work without a deadline'], answer: 1 },
+            { question: 'Which habit best supports long-term retention?', options: ['Spaced review', 'One massive study session', 'Only rereading notes', 'Never testing yourself'], answer: 0 }
+        ];
+        let coachTipIndex = 0;
+        let calendarDate = new Date();
+        let quizState = { index: 0, selected: null, score: 0 };
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('visible');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toast.classList.remove('visible'), 2800);
+        }
+
+        function getProgress() {
+            return JSON.parse(localStorage.getItem(progressStorageKey) || '{"points":0,"hours":42,"goalComplete":false}');
+        }
+
+        function readCollection(key) {
+            return JSON.parse(localStorage.getItem(key) || '[]');
+        }
+
+        function saveCollection(key, value) {
+            localStorage.setItem(key, JSON.stringify(value));
+        }
+
+        function todayKey(date = new Date()) {
+            return date.toISOString().slice(0, 10);
+        }
+
+        function markStudyDay() {
+            const days = readCollection(studyLogStorageKey);
+            const today = todayKey();
+            if (!days.includes(today)) {
+                days.push(today);
+                saveCollection(studyLogStorageKey, days);
+            }
+        }
+
+        function calculateStreak() {
+            const days = new Set(readCollection(studyLogStorageKey));
+            let cursor = new Date();
+            let streak = 0;
+            while (days.has(todayKey(cursor))) {
+                streak += 1;
+                cursor.setDate(cursor.getDate() - 1);
+            }
+            return streak;
+        }
+
+        function updateStats() {
+            const profile = JSON.parse(localStorage.getItem(profileStorageKey) || '{}');
+            const progress = getProgress();
+            document.getElementById('profileName').textContent = profile.name || 'Guest';
+            document.getElementById('profilePoints').textContent = progress.points;
+            document.getElementById('profileHours').textContent = progress.hours;
+            document.getElementById('progressText').innerHTML = `<strong>Progress:</strong> ${progress.goalComplete ? '100%' : '75%'} Completion`;
+        }
+
+        function openProfileModal() {
+            const profile = JSON.parse(localStorage.getItem(profileStorageKey) || '{}');
+            document.getElementById('nameInput').value = profile.name || '';
+            document.getElementById('gradeInput').value = profile.grade || '';
+            document.getElementById('interestInput').value = profile.interest || '';
+            document.getElementById('formMessage').textContent = '';
+            profileModal.classList.add('open');
+            document.getElementById('nameInput').focus();
+        }
+
+        function closeProfileModal() {
+            profileModal.classList.remove('open');
+        }
+
+        function openLoginModal() {
+            document.getElementById('loginMessage').textContent = '';
+            loginModal.classList.add('open');
+            document.getElementById('loginEmailInput').focus();
+        }
+
+        function closeLoginModal() {
+            loginModal.classList.remove('open');
+        }
+
+        function getSettings() {
+            return JSON.parse(localStorage.getItem(settingsStorageKey) || '{"theme":"dark","compact":false,"reducedMotion":false}');
+        }
+
+        function applySettings() {
+            const settings = getSettings();
+            document.body.classList.toggle('light-theme', settings.theme === 'light');
+            document.body.classList.toggle('compact-mode', settings.compact === true);
+            document.body.classList.toggle('reduced-motion', settings.reducedMotion === true);
+            document.getElementById('themeSelect').value = settings.theme;
+            document.getElementById('compactToggle').checked = settings.compact === true;
+            document.getElementById('motionToggle').checked = settings.reducedMotion === true;
+        }
+
+        function saveSetting(name, value) {
+            const settings = { ...getSettings(), [name]: value };
+            localStorage.setItem(settingsStorageKey, JSON.stringify(settings));
+            applySettings();
+            showToast('Settings saved on this device.');
+        }
+
+        function openSettingsModal() {
+            applySettings();
+            settingsModal.classList.add('open');
+            document.getElementById('themeSelect').focus();
+        }
+
+        function closeSettingsModal() {
+            settingsModal.classList.remove('open');
+        }
+
         function openTab(evt, tabName) {
             // Get all elements with class="tab-content" and hide them
             var tabcontent = document.getElementsByClassName("tab-content");
@@ -269,12 +1260,395 @@ Scholar quest(combination of gapify and extra maxxer)
             var tablinks = document.getElementsByClassName("tab-btn");
             for (var i = 0; i < tablinks.length; i++) {
                 tablinks[i].classList.remove("active");
+                tablinks[i].setAttribute("aria-selected", "false");
             }
 
             // Show the current tab, and add an "active" class to the button that opened the tab
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
+            evt.currentTarget.setAttribute("aria-selected", "true");
+            updateStats();
+            if (tabName === 'planner') renderTasks();
+            if (tabName === 'scholarships') renderScholarships();
+            if (tabName === 'activities') renderActivities();
+            if (tabName === 'coach') renderCoach();
+            if (tabName === 'quiz') renderQuiz();
+            if (tabName === 'calendar') renderCalendar();
+            if (tabName === 'achievements') renderAchievements();
         }
+
+        function renderCoach() {
+            const profile = JSON.parse(localStorage.getItem(profileStorageKey) || '{}');
+            document.getElementById('coachGreeting').textContent = profile.name ? `${profile.name}'s personalized focus plan` : 'Your personalized focus plan';
+            document.getElementById('coachTip').textContent = coachTips[coachTipIndex];
+        }
+
+        function renderQuiz() {
+            const current = quizQuestions[quizState.index];
+            document.getElementById('quizProgress').textContent = `Question ${quizState.index + 1} of ${quizQuestions.length}`;
+            document.getElementById('quizQuestion').textContent = current.question;
+            document.getElementById('quizResult').textContent = '';
+            const options = document.getElementById('quizOptions');
+            options.innerHTML = '';
+            current.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = `quiz-option${quizState.selected === index ? ' selected' : ''}`;
+                button.type = 'button';
+                button.textContent = option;
+                button.addEventListener('click', () => {
+                    quizState.selected = index;
+                    renderQuiz();
+                });
+                options.appendChild(button);
+            });
+        }
+
+        function renderCalendar() {
+            const year = calendarDate.getFullYear();
+            const month = calendarDate.getMonth();
+            document.getElementById('calendarTitle').textContent = calendarDate.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => `<span class="calendar-label">${day}</span>`).join('');
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const studyDays = new Set(readCollection(studyLogStorageKey));
+            for (let index = 0; index < firstDay; index += 1) grid.appendChild(document.createElement('span'));
+            for (let day = 1; day <= daysInMonth; day += 1) {
+                const cell = document.createElement('span');
+                const date = new Date(year, month, day);
+                const key = todayKey(date);
+                cell.className = `calendar-day${key === todayKey() ? ' today' : ''}${studyDays.has(key) ? ' studied' : ''}`;
+                cell.textContent = day;
+                grid.appendChild(cell);
+            }
+            document.getElementById('streakNumber').textContent = calculateStreak();
+        }
+
+        function renderAchievements() {
+            const progress = getProgress();
+            const tasks = readCollection(tasksStorageKey);
+            const completedTasks = tasks.filter((task) => task.done).length;
+            const quiz = JSON.parse(localStorage.getItem(quizStorageKey) || '{"best":0}');
+            const achievements = [
+                { icon: '🔥', title: 'First Step', detail: 'Study for one day', unlocked: readCollection(studyLogStorageKey).length >= 1 },
+                { icon: '✅', title: 'Task Tamer', detail: 'Complete three tasks', unlocked: completedTasks >= 3 },
+                { icon: '🧠', title: 'Quiz Scholar', detail: 'Score 3/3 on a quiz', unlocked: quiz.best >= 3 },
+                { icon: '⭐', title: 'Quest Builder', detail: 'Earn 100 points', unlocked: progress.points >= 100 }
+            ];
+            document.getElementById('achievementGrid').innerHTML = achievements.map((item) => `<div class="achievement-card${item.unlocked ? ' unlocked' : ''}"><span class="achievement-icon">${item.icon}</span><strong>${item.title}</strong><span class="item-meta">${item.unlocked ? 'Unlocked' : item.detail}</span></div>`).join('');
+            const chart = document.getElementById('progressChart');
+            const values = [0, 0, 0, 0, 0, 0, progress.points];
+            chart.innerHTML = values.map((value, index) => `<div class="chart-bar" style="height: ${Math.max(8, Math.min(100, value / 2))}%"><span>${index === 6 ? 'Today' : `D-${6 - index}`}</span></div>`).join('');
+        }
+
+        function renderTasks() {
+            const list = document.getElementById('plannerList');
+            const tasks = readCollection(tasksStorageKey);
+            list.innerHTML = '';
+            if (!tasks.length) {
+                list.innerHTML = '<li class="empty-state">No study tasks yet. Add your first task above.</li>';
+                return;
+            }
+            tasks.sort((a, b) => a.date.localeCompare(b.date));
+            tasks.forEach((task) => {
+                const item = document.createElement('li');
+                item.className = `planner-item${task.done ? ' done' : ''}`;
+                item.innerHTML = `<div><span class="item-title"></span><span class="item-meta"></span></div><button class="btn btn-secondary" type="button">${task.done ? 'Undo' : 'Complete'}</button>`;
+                item.querySelector('.item-title').textContent = task.title;
+                item.querySelector('.item-meta').textContent = `Due ${task.date}`;
+                item.querySelector('button').addEventListener('click', () => {
+                    task.done = !task.done;
+                    saveCollection(tasksStorageKey, tasks);
+                    if (task.done) {
+                        const progress = getProgress();
+                        progress.points += 25;
+                        saveCollection(progressStorageKey, progress);
+                        showToast('Study task completed! +25 quest points.');
+                    }
+                    renderTasks();
+                    updateStats();
+                });
+                list.appendChild(item);
+            });
+        }
+
+        function renderScholarships() {
+            const list = document.getElementById('scholarshipList');
+            const query = document.getElementById('scholarshipSearch').value.toLowerCase();
+            const category = document.getElementById('scholarshipCategory').value;
+            const saved = readCollection(savedScholarshipsStorageKey);
+            const matches = scholarships.filter((item) => {
+                const matchesQuery = `${item.title} ${item.description}`.toLowerCase().includes(query);
+                return matchesQuery && (category === 'all' || item.category === category);
+            });
+            list.innerHTML = '';
+            if (!matches.length) {
+                list.innerHTML = '<div class="empty-state">No scholarships match those filters.</div>';
+                return;
+            }
+            matches.forEach((item) => {
+                const card = document.createElement('article');
+                const isSaved = saved.includes(item.id);
+                card.className = 'scholarship-card';
+                card.innerHTML = `<div><h4></h4><p></p><span class="item-meta"></span></div><button class="btn btn-secondary" type="button">${isSaved ? 'Saved' : 'Save'}</button>`;
+                card.querySelector('h4').textContent = `${item.title} - ${item.amount}`;
+                card.querySelector('p').textContent = item.description;
+                card.querySelector('.item-meta').textContent = `${item.category} | Deadline ${item.deadline}`;
+                card.querySelector('button').addEventListener('click', () => {
+                    const current = readCollection(savedScholarshipsStorageKey);
+                    const next = current.includes(item.id) ? current.filter((id) => id !== item.id) : [...current, item.id];
+                    saveCollection(savedScholarshipsStorageKey, next);
+                    renderScholarships();
+                    showToast(next.includes(item.id) ? 'Scholarship saved.' : 'Scholarship removed.');
+                });
+                list.appendChild(card);
+            });
+        }
+
+        function renderActivities() {
+            const list = document.getElementById('activityList');
+            const activities = readCollection(activitiesStorageKey);
+            list.innerHTML = '';
+            if (!activities.length) {
+                list.innerHTML = '<li class="empty-state">No activities yet. Add a club, volunteer role, or project.</li>';
+                return;
+            }
+            activities.forEach((activity) => {
+                const item = document.createElement('li');
+                item.className = 'activity-item';
+                item.innerHTML = `<div><span class="item-title"></span><span class="item-meta"></span></div><button class="btn btn-secondary" type="button">Remove</button>`;
+                item.querySelector('.item-title').textContent = activity.title;
+                item.querySelector('.item-meta').textContent = `${activity.hours} hours logged`;
+                item.querySelector('button').addEventListener('click', () => {
+                    saveCollection(activitiesStorageKey, activities.filter((entry) => entry.id !== activity.id));
+                    renderActivities();
+                    showToast('Activity removed.');
+                });
+                list.appendChild(item);
+            });
+        }
+
+        document.getElementById('profileButton').addEventListener('click', openProfileModal);
+        document.getElementById('loginButton').addEventListener('click', openLoginModal);
+        document.getElementById('editProfileButton').addEventListener('click', openProfileModal);
+        document.querySelector('.close-modal').addEventListener('click', closeProfileModal);
+        document.getElementById('closeLoginButton').addEventListener('click', closeLoginModal);
+        document.getElementById('settingsButton').addEventListener('click', openSettingsModal);
+        document.getElementById('closeSettingsButton').addEventListener('click', closeSettingsModal);
+        profileModal.addEventListener('click', (event) => {
+            if (event.target === profileModal) closeProfileModal();
+        });
+        loginModal.addEventListener('click', (event) => {
+            if (event.target === loginModal) closeLoginModal();
+        });
+        settingsModal.addEventListener('click', (event) => {
+            if (event.target === settingsModal) closeSettingsModal();
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeProfileModal();
+                closeLoginModal();
+                closeSettingsModal();
+            }
+        });
+
+        document.getElementById('themeSelect').addEventListener('change', (event) => {
+            saveSetting('theme', event.target.value);
+        });
+        document.getElementById('compactToggle').addEventListener('change', (event) => {
+            saveSetting('compact', event.target.checked);
+        });
+        document.getElementById('motionToggle').addEventListener('change', (event) => {
+            saveSetting('reducedMotion', event.target.checked);
+        });
+        document.getElementById('resetDataButton').addEventListener('click', () => {
+            if (!window.confirm('Reset all ScholarQuest data on this device?')) return;
+            [profileStorageKey, progressStorageKey, tasksStorageKey, activitiesStorageKey, savedScholarshipsStorageKey, studyLogStorageKey, quizStorageKey].forEach((key) => localStorage.removeItem(key));
+            localStorage.removeItem(settingsStorageKey);
+            applySettings();
+            updateStats();
+            renderTasks();
+            renderScholarships();
+            renderActivities();
+            renderCalendar();
+            renderAchievements();
+            closeSettingsModal();
+            showToast('Your local app data was reset.');
+        });
+
+        profileForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const data = Object.fromEntries(new FormData(profileForm));
+            localStorage.setItem(profileStorageKey, JSON.stringify(data));
+            document.getElementById('formMessage').textContent = 'Profile saved locally.';
+            applySettings();
+            updateStats();
+            showToast(`Welcome to ScholarQuest, ${data.name}!`);
+            setTimeout(closeProfileModal, 700);
+        });
+
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const email = new FormData(loginForm).get('email');
+            document.getElementById('loginMessage').textContent = `Login request ready for ${email}. Connect this form to your authentication provider to enable account access.`;
+            showToast('Email login form submitted.');
+        });
+
+        function showGoogleAuthSetupMessage(action) {
+            document.getElementById('loginMessage').textContent = `${action} with Google is not configured yet. Add a valid Google OAuth client ID and authorized website origin before enabling it.`;
+            showToast('Google account setup is required.');
+        }
+
+        document.getElementById('gmailLoginButton').addEventListener('click', () => {
+            showGoogleAuthSetupMessage('Logging in');
+        });
+
+        document.getElementById('googleSignupButton').addEventListener('click', () => {
+            showGoogleAuthSetupMessage('Signing up');
+        });
+
+        document.getElementById('completeGoalButton').addEventListener('click', () => {
+            const progress = getProgress();
+            if (!progress.goalComplete) {
+                markStudyDay();
+                progress.goalComplete = true;
+                progress.points += 100;
+                localStorage.setItem(progressStorageKey, JSON.stringify(progress));
+                updateStats();
+                renderAchievements();
+                showToast('Study goal completed! +100 quest points.');
+            } else {
+                showToast('This study goal is already complete.');
+            }
+        });
+
+        document.getElementById('resetProgressButton').addEventListener('click', () => {
+            localStorage.setItem(progressStorageKey, JSON.stringify({ points: 0, hours: 42, goalComplete: false }));
+            updateStats();
+            showToast('Progress reset.');
+        });
+
+        document.getElementById('logHoursButton').addEventListener('click', () => {
+            const progress = getProgress();
+            progress.hours += 1;
+            progress.points += 25;
+            markStudyDay();
+            localStorage.setItem(progressStorageKey, JSON.stringify(progress));
+            updateStats();
+            renderAchievements();
+            showToast('Volunteer hour logged! +25 quest points.');
+        });
+
+        document.getElementById('newCoachTipButton').addEventListener('click', () => {
+            coachTipIndex = (coachTipIndex + 1) % coachTips.length;
+            renderCoach();
+        });
+
+        document.getElementById('coachTaskButton').addEventListener('click', () => {
+            const tasks = readCollection(tasksStorageKey);
+            tasks.push({ id: Date.now(), title: coachTips[coachTipIndex], date: todayKey(), done: false });
+            saveCollection(tasksStorageKey, tasks);
+            showToast('Coach tip added to your planner.');
+        });
+
+        document.getElementById('quizSubmitButton').addEventListener('click', () => {
+            if (quizState.selected === null) {
+                document.getElementById('quizResult').textContent = 'Choose an answer first.';
+                return;
+            }
+            const current = quizQuestions[quizState.index];
+            if (quizState.selected === current.answer) {
+                quizState.score += 1;
+                document.getElementById('quizResult').textContent = 'Correct! Nice work.';
+            } else {
+                document.getElementById('quizResult').textContent = `Not quite. Correct answer: ${current.options[current.answer]}`;
+            }
+            if (quizState.index === quizQuestions.length - 1) {
+                const quiz = JSON.parse(localStorage.getItem(quizStorageKey) || '{"best":0}');
+                quiz.best = Math.max(quiz.best, quizState.score);
+                localStorage.setItem(quizStorageKey, JSON.stringify(quiz));
+                const progress = getProgress();
+                progress.points += quizState.score * 10;
+                saveCollection(progressStorageKey, progress);
+                markStudyDay();
+                updateStats();
+                renderAchievements();
+                showToast(`Quiz finished: ${quizState.score}/${quizQuestions.length}.`);
+                quizState = { index: 0, selected: null, score: 0 };
+                return;
+            }
+            quizState.index += 1;
+            quizState.selected = null;
+            setTimeout(renderQuiz, 700);
+        });
+
+        document.getElementById('previousMonthButton').addEventListener('click', () => {
+            calendarDate.setMonth(calendarDate.getMonth() - 1);
+            renderCalendar();
+        });
+
+        document.getElementById('nextMonthButton').addEventListener('click', () => {
+            calendarDate.setMonth(calendarDate.getMonth() + 1);
+            renderCalendar();
+        });
+
+        document.getElementById('exportButton').addEventListener('click', () => {
+            const profile = JSON.parse(localStorage.getItem(profileStorageKey) || '{}');
+            const progress = getProgress();
+            const exportText = [
+                'ScholarQuest Student Profile',
+                `Name: ${profile.name || 'Guest'}`,
+                `Grade: ${profile.grade || 'Not set'}`,
+                `Interest: ${profile.interest || 'Not set'}`,
+                `Quest points: ${progress.points}`,
+                `Volunteer hours: ${progress.hours}`,
+                `Study tasks: ${readCollection(tasksStorageKey).length}`,
+                `Activities: ${readCollection(activitiesStorageKey).map((item) => `${item.title} (${item.hours} hours)`).join(', ') || 'None'}`
+            ].join('\n');
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(new Blob([exportText], { type: 'text/plain' }));
+            link.download = 'scholarquest-profile.txt';
+            link.click();
+            URL.revokeObjectURL(link.href);
+            showToast('Profile export downloaded.');
+        });
+
+        document.getElementById('plannerForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const data = Object.fromEntries(new FormData(event.currentTarget));
+            const tasks = readCollection(tasksStorageKey);
+            tasks.push({ id: Date.now(), title: data.task, date: data.date, done: false });
+            saveCollection(tasksStorageKey, tasks);
+            markStudyDay();
+            event.currentTarget.reset();
+            renderTasks();
+            renderCalendar();
+            showToast('Study task added.');
+        });
+
+        document.getElementById('scholarshipSearch').addEventListener('input', renderScholarships);
+        document.getElementById('scholarshipCategory').addEventListener('change', renderScholarships);
+
+        document.getElementById('activityForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const data = Object.fromEntries(new FormData(event.currentTarget));
+            const activities = readCollection(activitiesStorageKey);
+            activities.push({ id: Date.now(), title: data.activity, hours: Number(data.hours) });
+            saveCollection(activitiesStorageKey, activities);
+            event.currentTarget.reset();
+            renderActivities();
+            showToast('Activity added to your profile.');
+        });
+
+        applySettings();
+        renderCoach();
+        renderQuiz();
+        renderCalendar();
+        renderAchievements();
+        updateStats();
+        renderTasks();
+        renderScholarships();
+        renderActivities();
     </script>
 </body>
 </html>
